@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<?import java.net.URL?>
+<VBox fx:id="LoginUI" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.LoginController">
+   <stylesheets>
+      <URL value="@registerstyle.css"/>
+   </stylesheets>
+   <children>
+      <Label text="Welcome Back!">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUsername" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Username">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </TextField>
+      <PasswordField fx:id="txtPassword" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Password">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </PasswordField>
+      <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#handleLogin" text="Login">
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </Button>
+   </children>
+</VBox>

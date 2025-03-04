@@ -1,0 +1,42 @@
+.root {
+   -fx-background-color: #f2f3f4;
+       -fx-padding: 50px;
+       -fx-border-radius: 30px;
+       -fx-background-radius: 30px;
+       -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 15, 0, 0, 10);
+}
+
+.label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333; /* Dark Grey Text */
+    -fx-alignment: center;
+}
+
+.text-field, .password-field {
+    -fx-pref-width: 250px;
+    -fx-padding: 10px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-background-color: #ffffff;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: grey;
+}
+
+.button {
+    -fx-background-color: #6c63ff; /* Purple Colour */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 70px;
+    -fx-border-radius: 40px;
+    -fx-background-radius: 20px;
+    -fx-cursor: hand;
+    -fx-font-size: 16px; /* Bigger Text Size */
+    -fx-alignment: center;
+}
+
+.button:hover {
+    -fx-background-color: #5a54e8; /* Darker Purple on Hover */
+}
