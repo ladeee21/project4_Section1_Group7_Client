@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+
+<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.FileSelectionController">
+    <stylesheets>
+        <URL value="@registerstyle.css"/>
+    </stylesheets>
+    <Label text="FileFlix" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    <Label text="Select Photos" style="-fx-font-size: 18px;"/>
+    <GridPane hgap="10" vgap="10">
+        <Button fx:id="photo1" text="Photo 1" prefWidth="100" prefHeight="100"/>
+        <Button fx:id="photo2" text="Photo 2" prefWidth="100" prefHeight="100"/>
+        <Button fx:id="photo3" text="Photo 3" prefWidth="100" prefHeight="100"/>
+        <Button fx:id="photo4" text="Photo 4" prefWidth="100" prefHeight="100"/>
+    </GridPane>
+    <Button fx:id="btnSendFiles" text="Send" style="-fx-pref-width: 120px;"/>
+</VBox>

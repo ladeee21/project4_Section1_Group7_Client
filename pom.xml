@@ -12,7 +12,6 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 <junit.version>5.10.2</junit.version>  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.openjfx</groupId>
