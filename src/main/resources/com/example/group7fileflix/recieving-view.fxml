@@ -7,23 +7,21 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.group7fileflix.ReceivingController"
-            prefHeight="400.0" prefWidth="600.0">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.ReceivingController">
 
     <!-- Top Section -->
     <top>
-        <HBox spacing="10" alignment="CENTER_LEFT">
-            <Button fx:id="undoButton" text="Undo"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Label text="Waiting for Receive" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Button fx:id="cancelButton" text="Cancel"/>
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Button fx:id="undoButton" text="Undo" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Waiting To Receive" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="cancelButton" text="Cancel" />
         </HBox>
     </top>
 
     <padding>
-        <Insets top="10.0" left="10.0" right="10.0" bottom="10.0"/>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
 
 </BorderPane>
