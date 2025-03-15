@@ -39,7 +39,7 @@ public class RegisterController {
         } else if (!password.equals(confirmPassword)) {
             showAlert(Alert.AlertType.INFORMATION,"Registration Failed", "Passwords do not match");
         } else {
-           showAlert(Alert.AlertType.CONFIRMATION,"Registration Successfull", "Welcome to the FileFlix");
+          // showAlert(Alert.AlertType.CONFIRMATION,"Registration Successfull", "Welcome to the FileFlix");
             navigateTo("home-view.fxml");
         }
     }
