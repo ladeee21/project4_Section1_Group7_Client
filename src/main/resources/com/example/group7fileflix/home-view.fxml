@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="400.0" style="-fx-background-color: #E96151;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="400.0" style="-fx-background-color: #E96151;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.HomeController">
 
    <children>
 
@@ -21,11 +21,11 @@
       <Line endX="299.0" layoutX="101.0" layoutY="44.0" startX="-100.0" stroke="#ddcece" />
 
       <!-- Send Button (Circular) -->
-      <Button layoutX="158.0" layoutY="69.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+      <Button fx:id="btnSend" layoutX="158.0" layoutY="69.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 30;">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/send_icon.png" />
+                  <Image url="@../group7fileflix/images/send_icon.png" />
                </image>
             </ImageView>
          </graphic>
@@ -37,11 +37,11 @@
       </Label>
 
       <!-- Receive Button (Circular) -->
-      <Button layoutX="159.0" layoutY="158.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+      <Button fx:id="btnReceive" layoutX="159.0" layoutY="158.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 30;">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/receive_icon.jpeg" />
+                  <Image url="@../group7fileflix/images/receive_icon.jpeg" />
                </image>
             </ImageView>
          </graphic>
@@ -53,11 +53,11 @@
       </Label>
 
       <!-- Files Button (Circular) -->
-      <Button layoutX="165.0" layoutY="261.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+      <Button fx:id="btnFiles" layoutX="165.0" layoutY="261.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 30;">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/file_icon.jpg" />
+                  <Image url="@../group7fileflix/images/file_icon.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -78,7 +78,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/home_icon.jpg" />
+                        <Image url="@../group7fileflix/images/home_icon.jpg" />
                      </image>
                   </ImageView>
                </graphic>
@@ -90,11 +90,11 @@
             </Label>
 
             <!-- Settings Button -->
-            <Button layoutX="238.0" layoutY="1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+            <Button fx:id="btnSettings" layoutX="238.0" layoutY="1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/settings_icon.jpeg" />
+                        <Image url="@../group7fileflix/images/settings_icon.jpeg" />
                      </image>
                   </ImageView>
                </graphic>

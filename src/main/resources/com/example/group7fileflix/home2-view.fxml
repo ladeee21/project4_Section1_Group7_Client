@@ -25,7 +25,7 @@
          <graphic>
             <ImageView fitHeight="54.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/photo_icon.jpg" />
+                  <Image url="@../group7fileflix/images/photo_icon.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -34,7 +34,7 @@
          <graphic>
             <ImageView fitHeight="54.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/file_icon.jpg" />
+                  <Image url="@../group7fileflix/images/file_icon.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -53,7 +53,7 @@
          <graphic>
             <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/home_icon.jpg" />
+                  <Image url="@../group7fileflix/images/home_icon.jpg" />
                </image>
             </ImageView>
          </graphic>
@@ -68,7 +68,7 @@
          <graphic>
             <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/settings_icon.jpeg" />
+                  <Image url="@../group7fileflix/images/settings_icon.jpeg" />
                </image>
             </ImageView>
          </graphic>

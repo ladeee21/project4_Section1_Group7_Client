@@ -34,7 +34,7 @@
             <Insets top="20.0" />
          </VBox.margin>
       </PasswordField>
-      <Button fx:id="btnReigister" mnemonicParsing="false" onAction="#handleRegister" text="Register">
+      <Button fx:id="btnRegister" mnemonicParsing="false" onAction="#handleRegister" text="Register">
          <VBox.margin>
             <Insets top="20.0" />
          </VBox.margin>
