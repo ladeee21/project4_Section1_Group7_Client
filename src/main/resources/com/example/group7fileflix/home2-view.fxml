@@ -30,7 +30,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button accessibleText="Send" layoutX="160.0" layoutY="247.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="47.0" style="-fx-background-color: #FFFFFF;">
+      <Button fx:id="Fileset" layoutX="160.0" layoutY="247.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="47.0" style="-fx-background-color: #FFFFFF;">
          <graphic>
             <ImageView fitHeight="54.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                <image>

@@ -3,6 +3,7 @@ package com.example.group7fileflix;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -28,7 +29,7 @@ public class LoginController {
         String password = txtPassword.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            System.out.println("Please fill in all fields");
+            showAlert(Alert.AlertType.WARNING,"Login Failed", "Please enter all fields");
         } else {
             System.out.println("Login Successful!");
             navigateTo("home-view.fxml");
@@ -40,11 +41,18 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/group7fileflix/" + fxmlFile));
             Parent root = loader.load();
             Stage stage = (Stage) btnLogin.getScene().getWindow();
-            stage.setScene(new Scene(root, 400, 300));
+            stage.setScene(new Scene(root, 400, 500));
             stage.setTitle("Home - FileFlix");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Failed to load " + fxmlFile);
         }
+    }
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

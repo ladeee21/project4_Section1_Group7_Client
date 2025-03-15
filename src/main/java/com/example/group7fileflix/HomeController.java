@@ -48,7 +48,7 @@ public class HomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/group7fileflix/" + fxmlFile));
             Parent root = loader.load();
             Stage stage = (Stage) btnSend.getScene().getWindow(); // Get current stage
-            stage.setScene(new Scene(root, 400, 300));
+            stage.setScene(new Scene(root, 400, 500));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import java.net.URL?>
 
 <VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.FileSelectionController">
     <stylesheets>
-        <URL value="@registerstyle.css"/>
+        <URL value="@registerstyle.css" />
     </stylesheets>
-    <Label text="FileFlix" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
-    <Label text="Select Photos" style="-fx-font-size: 18px;"/>
+    <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="FileFlix" />
+    <Label style="-fx-font-size: 18px;" text="Select Photos" />
     <GridPane hgap="10" vgap="10">
-        <Button fx:id="photo1" text="Photo 1" prefWidth="100" prefHeight="100"/>
-        <Button fx:id="photo2" text="Photo 2" prefWidth="100" prefHeight="100"/>
-        <Button fx:id="photo3" text="Photo 3" prefWidth="100" prefHeight="100"/>
-        <Button fx:id="photo4" text="Photo 4" prefWidth="100" prefHeight="100"/>
+        <Button fx:id="photo1" prefHeight="100" prefWidth="100" text="Photo 1" />
+        <Button fx:id="photo2" prefHeight="100" prefWidth="100" text="Photo 2" />
+        <Button fx:id="photo3" prefHeight="100" prefWidth="100" text="Photo 3" />
+        <Button fx:id="photo4" prefHeight="100" prefWidth="100" text="Photos" />
+      <columnConstraints>
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+      </rowConstraints>
     </GridPane>
-    <Button fx:id="btnSendFiles" text="Send" style="-fx-pref-width: 120px;"/>
+    <Button fx:id="btnSendFiles" style="-fx-pref-width: 120px;" text="Send" />
 </VBox>

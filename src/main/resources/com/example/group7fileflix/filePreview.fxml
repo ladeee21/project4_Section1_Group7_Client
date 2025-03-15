@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
-<?import java.net.URL?>
-
 
 <VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.FilePreviewController">
     <stylesheets>
-        <URL value="@registerstyle.css"/>
+        <URL value="@registerstyle.css" />
     </stylesheets>
-    <Label text="FileFlix" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
-    <Label text="File Preview" style="-fx-font-size: 18px;"/>
-    <Button fx:id="filePreview" text="File" prefWidth="150" prefHeight="150"/>
-    <Label fx:id="fileNameLabel" text="Filename: example.txt"/>
-    <Button fx:id="btnSendFile" text="Send" style="-fx-pref-width: 120px;"/>
+    <Label layoutX="52.0" layoutY="152.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="FileFlix">
+      <VBox.margin>
+         <Insets top="18.0" />
+      </VBox.margin>
+      <padding>
+         <Insets top="10.0" />
+      </padding></Label>
+    <Label style="-fx-font-size: 18px;">
+      <graphic>
+         <TextField promptText=" Enter the File name" />
+      </graphic></Label>
+    <Button fx:id="btnSendFile" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-pref-width: 120px;" text="Send">
+      <VBox.margin>
+         <Insets top="30.0" />
+      </VBox.margin></Button>
 </VBox>

@@ -1,18 +1,15 @@
 package com.example.group7fileflix;
 
-import javafx.application.Application;
 import javafx.fxml.FXML;
-import javafx.stage.Stage;
+import javafx.application.Platform;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 
-public class ReceivingController extends Application {
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 
+public class ReceivingController {
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-
-    }
 }
