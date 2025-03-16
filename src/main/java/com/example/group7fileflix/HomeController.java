@@ -37,9 +37,9 @@ public class HomeController {
         }
 
         if (btnSettings != null) {
-            btnSettings.setOnAction(event -> switchScene("settings-view.fxml"));
+            btnSettings.setOnAction(event -> navigateTo("settings-view.fxml"));
         } else {
-            System.out.println("btnSettings is NULL!");
+            System.out.println("btnLogout is NULL!");
         }
     }
 
@@ -48,7 +48,20 @@ public class HomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/group7fileflix/" + fxmlFile));
             Parent root = loader.load();
             Stage stage = (Stage) btnSend.getScene().getWindow(); // Get current stage
-            stage.setScene(new Scene(root, 400, 500));
+            stage.setScene(new Scene(root, 400, 420));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load " + fxmlFile);
+        }
+    }
+
+    private void navigateTo(String fxmlFile) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/group7fileflix/" + fxmlFile));
+            Parent root = loader.load();
+            Stage stage = (Stage) btnSettings.getScene().getWindow(); // Get current stage
+            stage.setScene(new Scene(root, 400, 420));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -7,25 +7,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.SettingsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.SettingsController">
 
    <children>
-      <Label layoutX="215.0" layoutY="34.0" text="Settings">
+      <Label layoutX="166.0" layoutY="36.0" text="Settings">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
 
-      <ImageView fitHeight="150.0" fitWidth="172.0" layoutX="180.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/logout_icon.jpg" />
-         </image>
-      </ImageView>
-
-      <Button layoutX="216.0" layoutY="261.0" mnemonicParsing="false" text="LogOut">
+      <Button fx:id="btnLogout" layoutX="166.0" layoutY="328.0" mnemonicParsing="false" text="LogOut">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
+      <ImageView fitHeight="197.0" fitWidth="286.0" layoutX="102.0" layoutY="104.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../group7fileflix/images/logout_icon.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

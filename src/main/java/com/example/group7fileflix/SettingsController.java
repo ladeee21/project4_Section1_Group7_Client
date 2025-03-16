@@ -16,7 +16,11 @@ public class SettingsController {
 
     @FXML
     public void initialize() {
-        btnLogout.setOnAction(event -> logout());
+        if (btnLogout != null) {
+            btnLogout.setOnAction(event -> logout());
+        } else {
+            System.out.println("btnLogout is NULL! Check settings-view.fxml.");
+        }
     }
 
     private void logout() {
@@ -29,7 +33,7 @@ public class SettingsController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = loader.load();
             Stage stage = (Stage) btnLogout.getScene().getWindow();
-            stage.setScene(new Scene(root, 320, 240));
+            stage.setScene(new Scene(root, 320, 420));
             stage.setTitle("Welcome!"); // Back to the first screen
         } catch (IOException e) {
             e.printStackTrace();

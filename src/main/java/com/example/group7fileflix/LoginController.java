@@ -41,7 +41,7 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/group7fileflix/" + fxmlFile));
             Parent root = loader.load();
             Stage stage = (Stage) btnLogin.getScene().getWindow();
-            stage.setScene(new Scene(root, 400, 500));
+            stage.setScene(new Scene(root, 400, 420));
             stage.setTitle("Home - FileFlix");
         } catch (IOException e) {
             e.printStackTrace();

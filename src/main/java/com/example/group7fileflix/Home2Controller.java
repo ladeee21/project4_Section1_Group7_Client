@@ -12,8 +12,8 @@ import java.io.IOException;
 
 public class Home2Controller  {
     @FXML private Button btnPhotos;
-    @FXML
-    private Button Fileset;
+    @FXML private Button Fileset;
+    @FXML private Button btnSettings;
 
     @FXML
     public void initialize() {
@@ -22,6 +22,11 @@ public class Home2Controller  {
         } else {
             System.out.println("btnSend is NULL! Check FXML file.");
         }
+        if (btnSettings != null) {
+            btnSettings.setOnAction(event -> navigateTo("settings-view.fxml"));
+        } else {
+            System.out.println("btnLogout is NULL!");
+        }
     }
 
     private void switchScene(String fxmlFile) {
@@ -29,7 +34,20 @@ public class Home2Controller  {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/group7fileflix/" + fxmlFile));
             Parent root = loader.load();
             Stage stage = (Stage) Fileset.getScene().getWindow(); // Get current stage
-            stage.setScene(new Scene(root, 400, 500));
+            stage.setScene(new Scene(root, 400, 420));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load " + fxmlFile);
+        }
+    }
+
+    private void navigateTo(String fxmlFile) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/group7fileflix/" + fxmlFile));
+            Parent root = loader.load();
+            Stage stage = (Stage) btnSettings.getScene().getWindow(); // Get current stage
+            stage.setScene(new Scene(root, 400, 420));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
