@@ -17,15 +17,20 @@ public class Home2Controller  {
 
     @FXML
     public void initialize() {
+        if (btnPhotos != null) {
+            btnPhotos.setOnAction(event -> navigate("PhotoSelect-view.fxml"));
+        } else {
+            System.out.println("btnPhotos is NULL! Check FXML file.");
+        }
         if (Fileset != null) {
             Fileset.setOnAction(event -> switchScene("sendfiles-view.fxml"));
         } else {
-            System.out.println("btnSend is NULL! Check FXML file.");
+            System.out.println("Fileset is NULL! Check FXML file.");
         }
         if (btnSettings != null) {
             btnSettings.setOnAction(event -> navigateTo("settings-view.fxml"));
         } else {
-            System.out.println("btnLogout is NULL!");
+            System.out.println("btnSettings is NULL!");
         }
     }
 
@@ -47,6 +52,19 @@ public class Home2Controller  {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/group7fileflix/" + fxmlFile));
             Parent root = loader.load();
             Stage stage = (Stage) btnSettings.getScene().getWindow(); // Get current stage
+            stage.setScene(new Scene(root, 400, 420));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load " + fxmlFile);
+        }
+    }
+
+    private void navigate(String fxmlFile) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/group7fileflix/" + fxmlFile));
+            Parent root = loader.load();
+            Stage stage = (Stage) btnPhotos.getScene().getWindow(); // Get current stage
             stage.setScene(new Scene(root, 400, 420));
             stage.show();
         } catch (IOException e) {
