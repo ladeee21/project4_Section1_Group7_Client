@@ -4,9 +4,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 
+import javax.swing.text.html.ImageView;
 import java.io.IOException;
 
 public class HomeController {
@@ -15,6 +17,7 @@ public class HomeController {
     @FXML private Button btnReceive;
     @FXML private Button btnFiles;
     @FXML private Button btnSettings;
+
 
     @FXML
     public void initialize() {
@@ -25,7 +28,7 @@ public class HomeController {
         }
 
         if (btnReceive != null) {
-            btnReceive.setOnAction(event -> switchScene("receiving-view.fxml"));
+            btnReceive.setOnAction(event -> switchScene("fileRetreival-view.fxml"));
         } else {
             System.out.println("btnReceive is NULL!");
         }
@@ -41,6 +44,8 @@ public class HomeController {
         } else {
             System.out.println("btnLogout is NULL!");
         }
+
+
     }
 
     private void switchScene(String fxmlFile) {

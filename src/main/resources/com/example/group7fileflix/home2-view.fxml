@@ -10,6 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.Home2Controller">
    <children>
+      <Button fx:id="btnbackward" onAction="#initialize" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" text="Undo" />
       <Label layoutX="156.0" layoutY="25.0" text="FileFlix">
          <font>
             <Font name="System Bold" size="24.0" />
@@ -68,7 +69,7 @@
          <graphic>
             <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../group7fileflix/images/settings_icon.jpeg" />
+                  <Image url="@images/settings-Icon.png" />
                </image>
             </ImageView>
          </graphic>

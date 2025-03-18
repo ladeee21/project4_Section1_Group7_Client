@@ -21,12 +21,15 @@ public class PhotoSelectionController {
     @FXML private ImageView imageView;
 
     private File selectedFile;
+    @FXML private Button btnbackward;
 
     @FXML
     public void initialize() {
         btnPhoto.setOnAction(event -> selectPhoto());
         btnSendFiles.setOnAction(event -> uploadFile());
         btnBack.setOnAction(event -> goBack());
+        //btnbackward.setOnAction(event->"home2-view.fxml");
+
     }
 
     private void selectPhoto() {

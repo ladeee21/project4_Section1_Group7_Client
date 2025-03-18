@@ -8,12 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+import javax.swing.text.html.ImageView;
 import java.io.IOException;
 
 public class Home2Controller  {
     @FXML private Button btnPhotos;
     @FXML private Button Fileset;
     @FXML private Button btnSettings;
+    @FXML private Button btnbackward;
 
     @FXML
     public void initialize() {
@@ -32,6 +34,13 @@ public class Home2Controller  {
         } else {
             System.out.println("btnSettings is NULL!");
         }
+
+        if(btnbackward!=null) {
+            btnbackward.setOnAction(event -> navigateTo("home-view.fxml"));
+        }else{
+            System.out.println("backward is Null!");
+        }
+
     }
 
     private void switchScene(String fxmlFile) {

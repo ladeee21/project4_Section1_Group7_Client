@@ -26,5 +26,10 @@
             <Image url="@../group7fileflix/images/logout_icon.jpg" />
          </image>
       </ImageView>
+      <ImageView fx:id="backward" fitHeight="25.0" fitWidth="25.0" layoutX="32.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/arrow_icon.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

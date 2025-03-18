@@ -20,7 +20,7 @@
       </padding></Label>
     <Label style="-fx-font-size: 18px;">
       <graphic>
-         <TextField promptText=" Enter the File name" />
+         <TextField promptText=" Enter The File name" />
       </graphic></Label>
     <Button fx:id="btnSendFile" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-pref-width: 120px;" text="Send">
       <VBox.margin>
