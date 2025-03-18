@@ -8,9 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.PhotoSelectionController">
-
-    <!-- Back Button (Top Left) -->
-    <Button fx:id="btnBack" layoutX="10.0" layoutY="10.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" />
+   <Button fx:id="btnbackward" layoutX="14.0" layoutY="12.0" onAction="#initialize" mnemonicParsing="false" text="Undo" />
 
     <!-- Title -->
     <Label layoutX="155.0" layoutY="24.0" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="FileFlix" />
@@ -33,10 +31,5 @@
         <!-- Send Button -->
         <Button fx:id="btnSendFiles" prefHeight="21.0" prefWidth="135.0" text="Send" />
     </VBox>
-      <ImageView fx:id="backward" fitHeight="25.0" fitWidth="25.0" layoutX="32.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-          <image>
-              <Image url="@../group7fileflix/images/arrow_icon.png" />
-          </image>
-      </ImageView>
 
 </AnchorPane>

@@ -1,5 +1,8 @@
 package com.example.group7fileflix;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -12,7 +15,7 @@ import java.nio.file.StandardCopyOption;
 
 public class SendFilesController {
     @FXML
-    private Button pdfButton, docButton, pptButton, sendButton;
+    private Button pdfButton, docButton, pptButton, sendButton, btnbackward;
 
     private File selectedFile;
 
@@ -22,6 +25,7 @@ public class SendFilesController {
         docButton.setOnAction(e -> selectFile("Word Documents", "*.docx", "*.doc"));
         pptButton.setOnAction(e -> selectFile("PowerPoint Presentations", "*.ppt", "*.pptx"));
         sendButton.setOnAction(e -> uploadFile());
+        btnbackward.setOnAction(event->navigateTo("home2-view.fxml"));
     }
 
     private void selectFile(String fileType, String... extensions) {
@@ -52,6 +56,19 @@ public class SendFilesController {
             showAlert(Alert.AlertType.INFORMATION, "Upload Successful", "File uploaded successfully!");
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Upload Failed", "Error uploading file: " + e.getMessage());
+        }
+    }
+
+    private void navigateTo(String fxmlFile) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/group7fileflix/" + fxmlFile));
+            Parent root = loader.load();
+            Stage stage = (Stage) btnbackward.getScene().getWindow(); // Get current stage
+            stage.setScene(new Scene(root, 400, 420));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load " + fxmlFile);
         }
     }
 

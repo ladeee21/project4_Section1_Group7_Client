@@ -27,8 +27,12 @@ public class PhotoSelectionController {
     public void initialize() {
         btnPhoto.setOnAction(event -> selectPhoto());
         btnSendFiles.setOnAction(event -> uploadFile());
-        btnBack.setOnAction(event -> goBack());
-        //btnbackward.setOnAction(event->"home2-view.fxml");
+
+        if(btnbackward!=null) {
+            btnbackward.setOnAction(event -> navigateTo("home2-view.fxml"));
+        }else{
+            System.out.println("backward is Null!");
+        }
 
     }
 
@@ -78,6 +82,19 @@ public class PhotoSelectionController {
         } catch (IOException e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Navigation Error", "Failed to load home2-view.fxml");
+        }
+    }
+
+    private void navigateTo(String fxmlFile) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/group7fileflix/" + fxmlFile));
+            Parent root = loader.load();
+            Stage stage = (Stage) btnbackward.getScene().getWindow(); // Get current stage
+            stage.setScene(new Scene(root, 400, 420));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load " + fxmlFile);
         }
     }
 

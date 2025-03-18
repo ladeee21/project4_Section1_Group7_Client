@@ -12,7 +12,8 @@ import java.io.IOException;
 public class SettingsController {
 
     @FXML
-    private Button btnLogout;
+    private Button btnLogout, btnbackward;
+
 
     @FXML
     public void initialize() {
@@ -21,11 +22,30 @@ public class SettingsController {
         } else {
             System.out.println("btnLogout is NULL! Check settings-view.fxml.");
         }
+
+        if(btnbackward!=null) {
+            btnbackward.setOnAction(event -> navigateTo("home-view.fxml"));
+        }else{
+            System.out.println("backward is Null!");
+        }
     }
 
     private void logout() {
         System.out.println("User Logged Out!");
         switchScene("hello-view.fxml"); // Navigate to Welcome Screen
+    }
+
+    private void navigateTo(String fxmlFile) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/group7fileflix/" + fxmlFile));
+            Parent root = loader.load();
+            Stage stage = (Stage) btnbackward.getScene().getWindow(); // Get current stage
+            stage.setScene(new Scene(root, 400, 420));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load " + fxmlFile);
+        }
     }
 
     private void switchScene(String fxmlFile) {

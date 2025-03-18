@@ -10,6 +10,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.SettingsController">
 
    <children>
+      <Button fx:id="btnbackward" onAction="#initialize" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" text="Undo" />
       <Label layoutX="166.0" layoutY="36.0" text="Settings">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -24,11 +25,6 @@
       <ImageView fitHeight="197.0" fitWidth="286.0" layoutX="102.0" layoutY="104.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../group7fileflix/images/logout_icon.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="backward" fitHeight="25.0" fitWidth="25.0" layoutX="32.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/arrow_icon.png" />
          </image>
       </ImageView>
    </children>
