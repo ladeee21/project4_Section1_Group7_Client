@@ -1,5 +1,6 @@
 package com.example.group7fileflix;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -8,8 +9,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
-import java.io.File;
-import java.io.IOException;
+import javafx.util.Duration;
+
+import java.io.*;
+import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
@@ -35,7 +38,7 @@ public class SendFilesController {
 
         if (selectedFile != null) {
             long fileSize = selectedFile.length();
-            if (fileSize < 1048576) { // 1MB = 1048576 bytes
+            if (fileSize < 808400) { // 1MB = 1048576 bytes
                 showAlert(Alert.AlertType.ERROR, "File Too Small", "Please select a file larger than 1MB.");
                 selectedFile = null; // Reset selection
             } else {
@@ -50,13 +53,41 @@ public class SendFilesController {
             return;
         }
 
-        try {
-            File destination = new File("uploads/" + selectedFile.getName());
-            Files.copy(selectedFile.toPath(), destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            showAlert(Alert.AlertType.INFORMATION, "Upload Successful", "File uploaded successfully!");
+        String username = UserSession.getUsername();
+
+        try (Socket socket = new Socket("localhost", 55000);  // Connect to the server
+             OutputStream os = socket.getOutputStream();
+             DataOutputStream dos = new DataOutputStream(os);
+             FileInputStream fis = new FileInputStream(selectedFile)) {
+
+            // Send upload command to server
+            dos.writeUTF("UPLOAD");
+            dos.writeUTF(username);  // Send the username
+            dos.writeUTF(selectedFile.getName());  // Send the filename
+            dos.writeLong(selectedFile.length());  // Send the file size
+
+            // Send the file content
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                dos.write(buffer, 0, bytesRead);
+            }
+
+            dos.flush();
+            showAlert(Alert.AlertType.INFORMATION, "Upload Successful", "Photo uploaded successfully!");
+            navigateBackToHome();
+
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Upload Failed", "Error uploading file: " + e.getMessage());
         }
+
+    }
+
+    private void navigateBackToHome() {
+        // Add a short delay to show the success message
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(event -> navigateTo("home2-view.fxml"));
+        pause.play();
     }
 
     private void navigateTo(String fxmlFile) {

@@ -10,7 +10,7 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <Button fx:id="btnbackward" onAction="#initialize" mnemonicParsing="false" text="Undo">
+   <Button fx:id="btnbackward" mnemonicParsing="false" onAction="#initialize" text="Undo">
       <VBox.margin>
          <Insets right="300.0" top="-20.0" />
       </VBox.margin>
