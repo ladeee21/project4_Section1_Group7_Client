@@ -34,7 +34,7 @@ public class HomeController {
         }
 
         if (btnFiles != null) {
-            btnFiles.setOnAction(event -> switchScene("filePreview.fxml"));
+            btnFiles.setOnAction(event -> switchScene("file-view.fxml"));
         } else {
             System.out.println("btnFiles is NULL!");
         }

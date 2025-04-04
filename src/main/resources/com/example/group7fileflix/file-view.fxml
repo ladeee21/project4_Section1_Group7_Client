@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="420.0" prefWidth="400.0"
+            style="-fx-background-color: #E96151;"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.group7fileflix.FileController">
+
+    <children>
+        <Label layoutX="20.0" layoutY="10.0" text="Your Files" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+        <ListView fx:id="fileListView" layoutX="20.0" layoutY="50.0" prefHeight="300.0" prefWidth="360.0" />
+
+        <HBox layoutX="20.0" layoutY="370.0" spacing="10">
+            <Button fx:id="btnOpen" text="Open" prefWidth="80"/>
+            <Button fx:id="btnDelete" text="Delete" prefWidth="80"/>
+        </HBox>
+    </children>
+</AnchorPane>

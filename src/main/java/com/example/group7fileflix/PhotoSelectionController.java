@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -16,8 +17,7 @@ import javafx.util.Duration;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
+import java.util.Optional;
 
 public class PhotoSelectionController {
 
@@ -50,36 +50,82 @@ public class PhotoSelectionController {
 
         if (file != null) {
             long fileSize = file.length();
-            if (fileSize < 336114) {
-                showAlert(Alert.AlertType.ERROR, "File Too Small", "Please select a file larger than 1MB.", true);
+            if (fileSize < 1048576) {
+                showAlert(Alert.AlertType.ERROR, "File Too Small", "Please select a file larger than 1MB.");
                 return;
             }
 
             selectedFile = file;
             imageView.setImage(new Image(file.toURI().toString()));
             System.out.println("Selected Image: " + file.getAbsolutePath());
-            showAlert(Alert.AlertType.INFORMATION, "File Selected", "Selected File: " + selectedFile.getName(), true);
+            showAlert(Alert.AlertType.INFORMATION, "Image Selected", "Selected Image: " + selectedFile.getName());
         }
     }
-
     private void uploadFile() {
         if (selectedFile == null) {
-            showAlert(Alert.AlertType.ERROR, "No File Selected", "Please select a photo before sending.", true);
+            showAlert(Alert.AlertType.WARNING, "No Photo Selected", "Please select a photo before sending.");
             return;
         }
+        promptForFileName();
+    }
 
+    private void promptForFileName() {
+        TextInputDialog nameDialog = new TextInputDialog(selectedFile.getName());
+        nameDialog.setTitle("Provide File Name");
+        nameDialog.setHeaderText("Enter a file name for upload.");
+        nameDialog.setContentText("File Name:");
+
+        Optional<String> result = nameDialog.showAndWait();
+        result.ifPresent(fileName -> {
+            String trimmedFileName = fileName.trim();
+
+            //Check for invalid characters in the filename
+            if (trimmedFileName.matches(".*[\\\\/:*?\"<>|].*")) {
+                showAlert(Alert.AlertType.ERROR, "Invalid File Name", "File name cannot contain: \\ / : * ? \" < > |");
+                return; // Stop further processing
+            }
+
+            String uniqueFileName = ensureUniqueFileName(trimmedFileName);
+            if (uniqueFileName != null) {
+                sendFileWithMetadata(uniqueFileName);
+            }
+        });
+    }
+
+    private String ensureUniqueFileName(String fileName) {
+        File destination = new File("uploads/" + fileName);
+
+        while (destination.exists()) {
+            TextInputDialog nameDialog = new TextInputDialog(fileName);
+            nameDialog.setTitle("Duplicate Photo Name");
+            nameDialog.setHeaderText("A photo with this name already exists.");
+            nameDialog.setContentText("Please enter a new name for your photo:");
+
+            Optional<String> result = nameDialog.showAndWait();
+            if (result.isPresent()) {
+                fileName = result.get().trim();
+                destination = new File("uploads/" + fileName);
+            } else {
+                showAlert(Alert.AlertType.WARNING, "Operation Cancelled", "Photo upload cancelled.");
+                return null;
+            }
+        }
+        return fileName;
+    }
+
+    private void sendFileWithMetadata(String fileName) {
         String username = UserSession.getUsername();
 
-        try (Socket socket = new Socket("localhost", 55000);  // Connect to the server
+        try (Socket socket = new Socket("localhost", 55000);
              OutputStream os = socket.getOutputStream();
              DataOutputStream dos = new DataOutputStream(os);
              FileInputStream fis = new FileInputStream(selectedFile)) {
 
             // Send upload command to server
             dos.writeUTF("UPLOAD");
-            dos.writeUTF(username);  // Send the username
-            dos.writeUTF(selectedFile.getName());  // Send the filename
-            dos.writeLong(selectedFile.length());  // Send the file size
+            dos.writeUTF(username);
+            dos.writeUTF(fileName);
+            dos.writeLong(selectedFile.length());
 
             // Send the file content
             byte[] buffer = new byte[4096];
@@ -87,12 +133,13 @@ public class PhotoSelectionController {
             while ((bytesRead = fis.read(buffer)) != -1) {
                 dos.write(buffer, 0, bytesRead);
             }
-
             dos.flush();
-            showAlert(Alert.AlertType.INFORMATION, "Upload Successful", "Photo uploaded successfully!", false);
+
+            showAlert(Alert.AlertType.INFORMATION, "Upload Successful", "Your photo has been uploaded successfully!");
             navigateBackToHome();
+
         } catch (IOException e) {
-            showAlert(Alert.AlertType.ERROR, "Upload Failed", "Error uploading file: " + e.getMessage(), true);
+            showAlert(Alert.AlertType.ERROR, "Upload Failed", "Error uploading photo: " + e.getMessage());
         }
     }
 
@@ -116,12 +163,11 @@ public class PhotoSelectionController {
         pause.play();
     }
 
-    private void showAlert(Alert.AlertType type, String title, String message, boolean withOkButton) {
+    private void showAlert(Alert.AlertType type, String title, String message) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
-
         alert.showAndWait();
     }
 }
