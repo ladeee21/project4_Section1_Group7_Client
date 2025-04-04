@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.FileRetreivalView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.FileRetrievalView">
    <children>
       <Line endX="496.0" endY="1.9073486328125E-5" layoutX="104.0" layoutY="62.0" startX="-104.0" startY="1.1444091796875E-5" stroke="#ddcece" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="168.0" layoutY="22.0" text="FileFlix">
