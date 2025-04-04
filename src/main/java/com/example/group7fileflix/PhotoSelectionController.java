@@ -50,19 +50,26 @@ public class PhotoSelectionController {
 
         if (file != null) {
             long fileSize = file.length();
+            Logging.log("Selected file: " + file.getAbsolutePath() + " (Size: " + fileSize + " bytes)");
             if (fileSize < 1048576) {
+                Logging.log("File too small: " + file.getName());
                 showAlert(Alert.AlertType.ERROR, "File Too Small", "Please select a file larger than 1MB.");
                 return;
             }
 
             selectedFile = file;
             imageView.setImage(new Image(file.toURI().toString()));
+            Logging.log("Image loaded and displayed: " + selectedFile.getName());
             System.out.println("Selected Image: " + file.getAbsolutePath());
             showAlert(Alert.AlertType.INFORMATION, "Image Selected", "Selected Image: " + selectedFile.getName());
+        } else {
+            Logging.log("File selection canceled.");
         }
+
     }
     private void uploadFile() {
         if (selectedFile == null) {
+            Logging.log("Upload attempted with no photo selected.");
             showAlert(Alert.AlertType.WARNING, "No Photo Selected", "Please select a photo before sending.");
             return;
         }
@@ -78,6 +85,7 @@ public class PhotoSelectionController {
         Optional<String> result = nameDialog.showAndWait();
         result.ifPresent(fileName -> {
             String trimmedFileName = fileName.trim();
+            Logging.log("User entered file name: " + trimmedFileName);
 
             //Check for invalid characters in the filename
             if (trimmedFileName.matches(".*[\\\\/:*?\"<>|].*")) {
@@ -96,6 +104,8 @@ public class PhotoSelectionController {
         File destination = new File("uploads/" + fileName);
 
         while (destination.exists()) {
+            Logging.log("File name conflict detected: " + fileName);
+
             TextInputDialog nameDialog = new TextInputDialog(fileName);
             nameDialog.setTitle("Duplicate Photo Name");
             nameDialog.setHeaderText("A photo with this name already exists.");
@@ -104,8 +114,10 @@ public class PhotoSelectionController {
             Optional<String> result = nameDialog.showAndWait();
             if (result.isPresent()) {
                 fileName = result.get().trim();
+                Logging.log("User entered new file name: " + fileName);
                 destination = new File("uploads/" + fileName);
             } else {
+                Logging.log("User cancelled upload due to duplicate name.");
                 showAlert(Alert.AlertType.WARNING, "Operation Cancelled", "Photo upload cancelled.");
                 return null;
             }
@@ -121,6 +133,8 @@ public class PhotoSelectionController {
              DataOutputStream dos = new DataOutputStream(os);
              FileInputStream fis = new FileInputStream(selectedFile)) {
 
+            Logging.log("Starting upload for user: " + username + ", file: " + fileName);
+
             // Send upload command to server
             dos.writeUTF("UPLOAD");
             dos.writeUTF(username);
@@ -135,10 +149,12 @@ public class PhotoSelectionController {
             }
             dos.flush();
 
+            Logging.log("Upload completed for file: " + fileName);
             showAlert(Alert.AlertType.INFORMATION, "Upload Successful", "Your photo has been uploaded successfully!");
             navigateBackToHome();
 
         } catch (IOException e) {
+            Logging.log("Error uploading file: " + e.getMessage());
             showAlert(Alert.AlertType.ERROR, "Upload Failed", "Error uploading photo: " + e.getMessage());
         }
     }
@@ -150,8 +166,10 @@ public class PhotoSelectionController {
             Stage stage = (Stage) btnbackward.getScene().getWindow(); // Get current stage
             stage.setScene(new Scene(root, 400, 420));
             stage.show();
+            Logging.log("Navigated to " + fxmlFile);
         } catch (IOException e) {
             e.printStackTrace();
+            Logging.log("Navigation failed - unable to load " + fxmlFile);
             System.out.println("Failed to load " + fxmlFile);
         }
     }

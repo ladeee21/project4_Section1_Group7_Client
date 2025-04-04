@@ -1,0 +1,24 @@
+[2025-04-04 16:45:39] Attempting login for user: Navjeet
+[2025-04-04 16:45:39] Login successful for user: Navjeet
+[2025-04-04 16:45:41] Navigated to home-view.fxml
+[2025-04-04 16:45:44] Files loaded for user: Navjeet
+[2025-04-04 16:45:48] File opened: relaxing.jpg
+[2025-04-04 16:45:52] Navigated to: home2-view.fxml
+[2025-04-04 16:45:55] Navigated to: home-view.fxml
+[2025-04-04 16:46:09] Selected file: C:\Users\navje\OneDrive - Conestoga College\Desktop\Bsc Computer Science\Semester 4\Project IV\image.jpg (Size: 224273 bytes)
+[2025-04-04 16:46:09] File too small: image.jpg
+[2025-04-04 16:46:17] Selected file: C:\Users\navje\OneDrive - Conestoga College\Desktop\Bsc Computer Science\Semester 4\Project IV\3MB Image.jpg (Size: 1630962 bytes)
+[2025-04-04 16:46:17] Image loaded and displayed: 3MB Image.jpg
+[2025-04-04 16:46:30] User entered file name: relaxing.jpg
+[2025-04-04 16:46:30] Starting upload for user: Navjeet, file: relaxing.jpg
+[2025-04-04 16:46:30] Upload completed for file: relaxing.jpg
+[2025-04-04 16:46:34] Navigated to home2-view.fxml
+[2025-04-04 16:46:39] Navigated to: home-view.fxml
+[2025-04-04 16:46:51] Attempting to retrieve file: relaxing.jpg
+[2025-04-04 16:46:51] User 'Navjeet' requested file: relaxing.jpg
+[2025-04-04 16:46:51] File retrieved successfully: relaxing.jpg
+[2025-04-04 16:46:51] File saved locally: C:\Users\navje\project4_Section1_Group7\client_retrieves\Navjeet\relaxing.jpg
+[2025-04-04 16:46:51] Displayed image file content for: relaxing.jpg
+[2025-04-04 16:46:54] Navigated to: home-view.fxml
+[2025-04-04 16:46:56] Files loaded for user: Navjeet
+[2025-04-04 16:46:58] File opened: relaxing.jpg

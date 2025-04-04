@@ -32,6 +32,7 @@ public class LoginController {
         String password = txtPassword.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
+            Logging.log("Login failed - missing fields.");
             showAlert(Alert.AlertType.WARNING,"Login Failed", "Please enter all fields");
             return;
         }
@@ -40,6 +41,7 @@ public class LoginController {
              DataOutputStream output = new DataOutputStream(socket.getOutputStream());
              DataInputStream input = new DataInputStream(socket.getInputStream())) {
 
+            Logging.log("Attempting login for user: " + username);
             output.writeUTF("LOGIN");
             output.writeUTF(username);
             output.writeUTF(password);
@@ -48,12 +50,15 @@ public class LoginController {
             if (response.equals("AUTH_SUCCESS")) {
                 // Set the username in UserSession
                 UserSession.setUsername(username);
+                Logging.log("Login successful for user: " + username);
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome back!");
                 navigateTo("home-view.fxml");
             } else {
+                Logging.log("Login failed - invalid credentials for user: " + username);
                 showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid credentials.");
             }
         } catch (IOException e) {
+            Logging.log("Login failed - communication error: " + e.getMessage());
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Connection Error", "Could not connect to server.");
         }
@@ -66,8 +71,10 @@ public class LoginController {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.setScene(new Scene(root, 400, 420));
             stage.setTitle("Home - FileFlix");
+            Logging.log("Navigated to " + fxmlFile);
         } catch (IOException e) {
             e.printStackTrace();
+            Logging.log("Navigation failed - unable to load " + fxmlFile);
             System.out.println("Failed to load " + fxmlFile);
         }
     }

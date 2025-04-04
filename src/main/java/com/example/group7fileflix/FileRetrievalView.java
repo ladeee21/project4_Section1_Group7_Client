@@ -53,23 +53,28 @@ public class FileRetrievalView {
         String filename = strFilename.getText().trim();
 
         if (filename.isEmpty()) {
+            Logging.log("Filename input was empty.");
             showAlert(Alert.AlertType.ERROR, "Error", "Filename cannot be empty.");
             return;
         }
 
+        Logging.log("Attempting to retrieve file: " + filename);
         // Request the file from the server
         byte[] fileContent = requestFileFromServer(filename);
 
         if (fileContent != null) {
+            Logging.log("File retrieved successfully: " + filename);
             // Show file content in a new window
             showFileContent(filename, fileContent);
         } else {
+            Logging.log("Failed to retrieve file: " + filename);
             showAlert(Alert.AlertType.ERROR, "Error", "File not found.");
         }
     }
 
     private byte[] requestFileFromServer(String filename) {
         String username = UserSession.getUsername(); // Get the logged-in user's username
+        Logging.log("User '" + username + "' requested file: " + filename);
 
         try (Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT)) {
             socket.setSoTimeout(5000); // Set a timeout of 5 seconds to avoid infinite blocking
@@ -90,12 +95,14 @@ public class FileRetrievalView {
 
                 if (!accessGranted) {
                     String message = dis.readUTF();  // Read the error message
+                    Logging.log("Access denied for user '" + username + "' to file: " + filename + " - Reason: " + message);
                     showAlert(Alert.AlertType.ERROR, "Access Denied", message);  // Show the message
                     return null;
                 }
 
                 long fileSize = dis.readLong(); // Get the file size
                 if (fileSize <= 0) {
+                    Logging.log("File not found or empty on server: " + filename);
                     showAlert(Alert.AlertType.ERROR, "Error", "File not found or empty.");
                     return null;
                 }
@@ -114,6 +121,7 @@ public class FileRetrievalView {
                 }
 
                 if (offset < fileSize) {
+                    Logging.log("File transfer incomplete: " + filename);
                     showAlert(Alert.AlertType.ERROR, "Error", "File transfer incomplete.");
                     return null;
                 }
@@ -140,8 +148,10 @@ public class FileRetrievalView {
         File savedFile = new File(userDir, filename);
         try (FileOutputStream fos = new FileOutputStream(savedFile)) {
             fos.write(fileContent);
+            Logging.log("File saved locally: " + savedFile.getAbsolutePath());
             System.out.println("File saved to: " + savedFile.getAbsolutePath());
         } catch (IOException e) {
+            Logging.log("Failed to save file: " + e.getMessage());
             showAlert(Alert.AlertType.ERROR, "Save Error", "Failed to save the file: " + e.getMessage());
             return;
         }
@@ -161,7 +171,7 @@ public class FileRetrievalView {
             Scene scene = new Scene(vbox, 500, 400);
             stage.setScene(scene);
             stage.show();
-
+            Logging.log("Displayed .txt file content for: " + filename);
         } else if (filename.endsWith(".png") || filename.endsWith(".jpg") || filename.endsWith(".jpeg")) {
             Image image = new Image(new ByteArrayInputStream(fileContent));
             ImageView imageView = new ImageView(image);
@@ -181,7 +191,7 @@ public class FileRetrievalView {
             stage.setScene(scene);
             stage.sizeToScene(); // Resize window to fit content
             stage.show();
-
+            Logging.log("Displayed image file content for: " + filename);
         } else {
             // Step 3: Preview for other file types using system viewer
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -192,7 +202,9 @@ public class FileRetrievalView {
 
             try {
                 Desktop.getDesktop().open(savedFile); // Let OS handle preview
+                Logging.log("Opened file with system default viewer: " + savedFile.getAbsolutePath());
             } catch (IOException e) {
+                Logging.log("Opened file with system default viewer: " + savedFile.getAbsolutePath());
                 showAlert(Alert.AlertType.ERROR, "Open Error", "Could not open file: " + e.getMessage());
             }
         }
@@ -213,8 +225,10 @@ public class FileRetrievalView {
             Stage stage = (Stage) btnbackward.getScene().getWindow(); // Get current stage
             stage.setScene(new Scene(root, 400, 420));
             stage.show();
+            Logging.log("Navigated to: " + fxmlFile);
         } catch (IOException e) {
             e.printStackTrace();
+            Logging.log("Navigation failed: " + e.getMessage());
             System.out.println("Failed to load " + fxmlFile);
         }
     }

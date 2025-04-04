@@ -32,6 +32,7 @@ public class SettingsController {
 
     private void logout() {
         System.out.println("User Logged Out!");
+        Logging.log("User logged out.");
         switchScene("hello-view.fxml"); // Navigate to Welcome Screen
     }
 
@@ -42,9 +43,11 @@ public class SettingsController {
             Stage stage = (Stage) btnbackward.getScene().getWindow(); // Get current stage
             stage.setScene(new Scene(root, 400, 420));
             stage.show();
+            Logging.log("Navigated to: " + fxmlFile);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Failed to load " + fxmlFile);
+            Logging.log("Failed to load: " + fxmlFile + " | Error: " + e.getMessage());
         }
     }
 
@@ -55,9 +58,11 @@ public class SettingsController {
             Stage stage = (Stage) btnLogout.getScene().getWindow();
             stage.setScene(new Scene(root, 320, 420));
             stage.setTitle("Welcome!"); // Back to the first screen
+            Logging.log("Switched scene to: " + fxmlFile);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Failed to load " + fxmlFile);
+            Logging.log("Failed to switch scene to: " + fxmlFile + " | Error: " + e.getMessage());
         }
     }
 }

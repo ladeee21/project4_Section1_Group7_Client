@@ -39,11 +39,14 @@ public class SendFilesController {
         if (selectedFile != null) {
             long fileSize = selectedFile.length();
             if (fileSize < 1048576) { // 1MB = 1048576 bytes
+                Logging.log("Selected file too small: " + selectedFile.getName());
                 showAlert(Alert.AlertType.ERROR, "File Too Small", "Please select a file larger than 1MB.");
                 selectedFile = null; // Reset selection
             } else {
+                Logging.log("File selected: " + selectedFile.getAbsolutePath() + " (" + fileSize + " bytes)");
                 showAlert(Alert.AlertType.INFORMATION, "File Selected", "Selected File: " + selectedFile.getName());
             }
+
         }
     }
 
@@ -74,6 +77,7 @@ public class SendFilesController {
             String uniqueFileName = ensureUniqueFileName(trimmedFileName);
             if (uniqueFileName != null) {
                 sendFileWithMetadata(uniqueFileName);
+                Logging.log("User entered file name: " + trimmedFileName);
             }
         });
     }
@@ -109,6 +113,9 @@ public class SendFilesController {
 
             // Send upload command to server
             dos.writeUTF("UPLOAD");
+
+            //LOG BEFORE sending
+            Logging.log("Sending file: " + fileName + " from user: " + username);
             dos.writeUTF(username);
             dos.writeUTF(fileName);
             dos.writeLong(selectedFile.length());
@@ -122,10 +129,12 @@ public class SendFilesController {
             dos.flush();
 
             showAlert(Alert.AlertType.INFORMATION, "Upload Successful", "Your file has been uploaded successfully!");
+            Logging.log("Upload successful: " + fileName + " (" + selectedFile.length() + " bytes)");
             navigateBackToHome();
 
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Upload Failed", "Error uploading file: " + e.getMessage());
+            Logging.log("Upload failed for file: " + fileName + " | Error: " + e.getMessage());
         }
     }
 
@@ -142,6 +151,7 @@ public class SendFilesController {
             Stage stage = (Stage) btnbackward.getScene().getWindow();
             stage.setScene(new Scene(root, 400, 420));
             stage.show();
+            Logging.log("Navigated back to home2-view.fxml");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Failed to load " + fxmlFile);
