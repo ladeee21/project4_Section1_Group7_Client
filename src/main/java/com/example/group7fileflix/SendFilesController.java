@@ -38,9 +38,6 @@ public class SendFilesController {
 
         if (selectedFile != null) {
             long fileSize = selectedFile.length();
-
-            if (fileSize < 1048576) {
-
             if (fileSize < 1048576) { // 1MB = 1048576 bytes
                 Logging.log("Selected file too small: " + selectedFile.getName());
                 showAlert(Alert.AlertType.ERROR, "File Too Small", "Please select a file larger than 1MB.");
@@ -49,7 +46,6 @@ public class SendFilesController {
                 Logging.log("File selected: " + selectedFile.getAbsolutePath() + " (" + fileSize + " bytes)");
                 showAlert(Alert.AlertType.INFORMATION, "File Selected", "Selected File: " + selectedFile.getName());
             }
-
         }
     }
 
@@ -95,19 +91,16 @@ public class SendFilesController {
             }
             return null;
         });
+
         Optional<String> result = dialog.showAndWait();
-        result.ifPresent(nameOnly -> {
-            if (nameOnly.isEmpty()) {
+        result.ifPresent(trimmedFileName -> {
+            if (trimmedFileName.isEmpty()) {
                 showAlert(Alert.AlertType.ERROR, "Invalid Name", "Name cannot be empty.");
-            } else if (nameOnly.matches(".*[\\\\/:*?\"<>|].*")) {
+            } else if (trimmedFileName.matches(".*[\\\\/:*?\"<>|].*")) {
                 showAlert(Alert.AlertType.ERROR, "Invalid Name", "File name cannot contain: \\ / : * ? \" < > |");
             } else {
-                String finalName = nameOnly + extension;
+                String finalName = trimmedFileName + extension;
                 sendFileWithMetadata(finalName);
-
-            String uniqueFileName = ensureUniqueFileName(trimmedFileName);
-            if (uniqueFileName != null) {
-                sendFileWithMetadata(uniqueFileName);
                 Logging.log("User entered file name: " + trimmedFileName);
             }
         });
@@ -134,8 +127,8 @@ public class SendFilesController {
 
             dos.writeUTF("UPLOAD");
 
-            //LOG BEFORE sending
             Logging.log("Sending file: " + fileName + " from user: " + username);
+
             dos.writeUTF(username);
             dos.writeUTF(fileName);
             dos.writeLong(selectedFile.length());
@@ -147,12 +140,15 @@ public class SendFilesController {
             }
             dos.flush();
 
-            String serverResponse = new DataInputStream(socket.getInputStream()).readUTF();
+            DataInputStream dis = new DataInputStream(socket.getInputStream());
+            String serverResponse = dis.readUTF();
 
             switch (serverResponse) {
                 case "UPLOAD_SUCCESS":
-                    showAlert(Alert.AlertType.INFORMATION, "Upload Successful", "Your file has been uploaded successfully!");
-                    navigateBackToHome();
+                    Platform.runLater(() -> {
+                        showAlert(Alert.AlertType.INFORMATION, "Upload Successful", "Your file has been uploaded successfully!");
+                        navigateBackToHome();
+                    });
                     break;
 
                 case "DUPLICATE_FILE":
@@ -166,56 +162,48 @@ public class SendFilesController {
                         ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
                         duplicateAlert.getButtonTypes().setAll(renameButton, cancelButton);
 
-                        Optional<ButtonType> result = duplicateAlert.showAndWait();
-                        if (result.isPresent() && result.get() == renameButton) {
+                        Optional<ButtonType> choice = duplicateAlert.showAndWait();
+                        if (choice.isPresent() && choice.get() == renameButton) {
                             promptForFileName();
-                        } else {
-                            showAlert(Alert.AlertType.INFORMATION, "Upload Cancelled", "File upload has been cancelled.");
-                            navigateBackToHome();
                         }
                     });
                     break;
 
                 default:
-                    showAlert(Alert.AlertType.ERROR, "Upload Failed", "An unexpected error occurred. Server response: " + serverResponse);
+                    Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Upload Failed", "An unknown error occurred: " + serverResponse));
                     break;
             }
-            showAlert(Alert.AlertType.INFORMATION, "Upload Successful", "Your file has been uploaded successfully!");
-            Logging.log("Upload successful: " + fileName + " (" + selectedFile.length() + " bytes)");
-            navigateBackToHome();
 
         } catch (IOException e) {
-            showAlert(Alert.AlertType.ERROR, "Upload Failed", "Error uploading file: " + e.getMessage());
-            Logging.log("Upload failed for file: " + fileName + " | Error: " + e.getMessage());
+            e.printStackTrace();
+            Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Connection Error", "Failed to connect to the server."));
         }
     }
 
-
     private void navigateBackToHome() {
-        PauseTransition pause = new PauseTransition(Duration.seconds(2));
-        pause.setOnFinished(event -> navigateTo("home2-view.fxml"));
-        pause.play();
+        PauseTransition delay = new PauseTransition(Duration.seconds(1));
+        delay.setOnFinished(event -> navigateTo("home2-view.fxml"));
+        delay.play();
     }
 
     private void navigateTo(String fxmlFile) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/group7fileflix/" + fxmlFile));
-            Parent root = loader.load();
-            Stage stage = (Stage) btnbackward.getScene().getWindow();
-            stage.setScene(new Scene(root, 400, 420));
+            Stage stage = (Stage) sendButton.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+            stage.setScene(new Scene(root));
             stage.show();
-            Logging.log("Navigated back to home2-view.fxml");
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Failed to load " + fxmlFile);
         }
     }
 
     private void showAlert(Alert.AlertType type, String title, String message) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+        Platform.runLater(() -> {
+            Alert alert = new Alert(type);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
     }
 }

@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
@@ -25,6 +23,7 @@ import javafx.util.Duration;
 import java.io.*;
 import java.net.Socket;
 import java.util.Optional;
+import javafx.scene.control.*;
 
 public class PhotoSelectionController {
 
@@ -39,12 +38,11 @@ public class PhotoSelectionController {
         btnPhoto.setOnAction(event -> selectPhoto());
         btnSendFiles.setOnAction(event -> uploadFile());
 
-        if(btnbackward!=null) {
+        if (btnbackward != null) {
             btnbackward.setOnAction(event -> navigateTo("home2-view.fxml"));
-        }else{
+        } else {
             System.out.println("backward is Null!");
         }
-
     }
 
     private void selectPhoto() {
@@ -58,6 +56,7 @@ public class PhotoSelectionController {
         if (file != null) {
             long fileSize = file.length();
             Logging.log("Selected file: " + file.getAbsolutePath() + " (Size: " + fileSize + " bytes)");
+
             if (fileSize < 1048576) {
                 Logging.log("File too small: " + file.getName());
                 showAlert(Alert.AlertType.ERROR, "File Too Small", "Please select a file larger than 1MB.");
@@ -72,8 +71,8 @@ public class PhotoSelectionController {
         } else {
             Logging.log("File selection canceled.");
         }
-
     }
+
     private void uploadFile() {
         if (selectedFile == null) {
             Logging.log("Upload attempted with no photo selected.");
@@ -114,21 +113,6 @@ public class PhotoSelectionController {
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == confirmButton) {
                 return nameInput.getText().trim();
-
-        TextInputDialog nameDialog = new TextInputDialog(selectedFile.getName());
-        nameDialog.setTitle("Provide File Name");
-        nameDialog.setHeaderText("Enter a file name for upload.");
-        nameDialog.setContentText("File Name:");
-
-        Optional<String> result = nameDialog.showAndWait();
-        result.ifPresent(fileName -> {
-            String trimmedFileName = fileName.trim();
-            Logging.log("User entered file name: " + trimmedFileName);
-
-            //Check for invalid characters in the filename
-            if (trimmedFileName.matches(".*[\\\\/:*?\"<>|].*")) {
-                showAlert(Alert.AlertType.ERROR, "Invalid File Name", "File name cannot contain: \\ / : * ? \" < > |");
-                return; // Stop further processing
             }
             return null;
         });
@@ -146,7 +130,6 @@ public class PhotoSelectionController {
         });
     }
 
-
     private String getFileExtension(File file) {
         String name = file.getName();
         int lastDot = name.lastIndexOf(".");
@@ -156,30 +139,6 @@ public class PhotoSelectionController {
     private String removeExtension(String filename) {
         int lastDot = filename.lastIndexOf(".");
         return (lastDot != -1) ? filename.substring(0, lastDot) : filename;
-
-    private String ensureUniqueFileName(String fileName) {
-        File destination = new File("uploads/" + fileName);
-
-        while (destination.exists()) {
-            Logging.log("File name conflict detected: " + fileName);
-
-            TextInputDialog nameDialog = new TextInputDialog(fileName);
-            nameDialog.setTitle("Duplicate Photo Name");
-            nameDialog.setHeaderText("A photo with this name already exists.");
-            nameDialog.setContentText("Please enter a new name for your photo:");
-
-            Optional<String> result = nameDialog.showAndWait();
-            if (result.isPresent()) {
-                fileName = result.get().trim();
-                Logging.log("User entered new file name: " + fileName);
-                destination = new File("uploads/" + fileName);
-            } else {
-                Logging.log("User cancelled upload due to duplicate name.");
-                showAlert(Alert.AlertType.WARNING, "Operation Cancelled", "Photo upload cancelled.");
-                return null;
-            }
-        }
-        return fileName;
     }
 
     private void sendFileWithMetadata(String fileName) {
@@ -241,16 +200,9 @@ public class PhotoSelectionController {
 
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Upload Failed", "Error uploading file: " + e.getMessage());
-            Logging.log("Upload completed for file: " + fileName);
-            showAlert(Alert.AlertType.INFORMATION, "Upload Successful", "Your photo has been uploaded successfully!");
-            navigateBackToHome();
-
-        } catch (IOException e) {
-            Logging.log("Error uploading file: " + e.getMessage());
-            showAlert(Alert.AlertType.ERROR, "Upload Failed", "Error uploading photo: " + e.getMessage());
+            Logging.log("Upload failed for file: " + fileName);
         }
     }
-
 
     private void navigateTo(String fxmlFile) {
         try {

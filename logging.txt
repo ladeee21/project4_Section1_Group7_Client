@@ -22,3 +22,12 @@
 [2025-04-04 16:46:54] Navigated to: home-view.fxml
 [2025-04-04 16:46:56] Files loaded for user: Navjeet
 [2025-04-04 16:46:58] File opened: relaxing.jpg
+[2025-04-05 11:00:04] Attempting login for user: s_shalzy
+[2025-04-05 11:00:04] Login successful for user: s_shalzy
+[2025-04-05 11:00:07] Navigated to home-view.fxml
+[2025-04-05 11:00:08] Files loaded for user: s_shalzy
+[2025-04-05 11:00:14] Navigated to: home2-view.fxml
+[2025-04-05 11:00:28] Navigated to: home-view.fxml
+[2025-04-05 11:00:31] Files loaded for user: s_shalzy
+[2025-04-05 11:00:34] Navigated to: home2-view.fxml
+[2025-04-05 11:00:46] Navigated to: home-view.fxml
