@@ -7,7 +7,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.geometry.Insets;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -77,6 +84,37 @@ public class PhotoSelectionController {
     }
 
     private void promptForFileName() {
+        String extension = getFileExtension(selectedFile);
+        String originalName = removeExtension(selectedFile.getName());
+
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Provide File Name");
+        dialog.setHeaderText("Enter a file name (extension will be added automatically)");
+
+        ButtonType confirmButton = new ButtonType("Confirm", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(confirmButton, ButtonType.CANCEL);
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        TextField nameInput = new TextField(originalName);
+        Label previewLabel = new Label("Final file name: " + originalName + extension);
+        nameInput.textProperty().addListener((obs, oldVal, newVal) ->
+                previewLabel.setText("Final file name: " + newVal.trim() + extension));
+
+        grid.add(new Label("File Name:"), 0, 0);
+        grid.add(nameInput, 1, 0);
+        grid.add(previewLabel, 1, 1);
+
+        dialog.getDialogPane().setContent(grid);
+        Platform.runLater(nameInput::requestFocus);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == confirmButton) {
+                return nameInput.getText().trim();
+
         TextInputDialog nameDialog = new TextInputDialog(selectedFile.getName());
         nameDialog.setTitle("Provide File Name");
         nameDialog.setHeaderText("Enter a file name for upload.");
@@ -92,13 +130,32 @@ public class PhotoSelectionController {
                 showAlert(Alert.AlertType.ERROR, "Invalid File Name", "File name cannot contain: \\ / : * ? \" < > |");
                 return; // Stop further processing
             }
+            return null;
+        });
 
-            String uniqueFileName = ensureUniqueFileName(trimmedFileName);
-            if (uniqueFileName != null) {
-                sendFileWithMetadata(uniqueFileName);
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(nameOnly -> {
+            if (nameOnly.isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Name", "Name cannot be empty.");
+            } else if (nameOnly.matches(".*[\\\\/:*?\"<>|].*")) {
+                showAlert(Alert.AlertType.ERROR, "Invalid Name", "File name cannot contain: \\ / : * ? \" < > |");
+            } else {
+                String finalName = nameOnly + extension;
+                sendFileWithMetadata(finalName);
             }
         });
     }
+
+
+    private String getFileExtension(File file) {
+        String name = file.getName();
+        int lastDot = name.lastIndexOf(".");
+        return (lastDot != -1) ? name.substring(lastDot) : "";
+    }
+
+    private String removeExtension(String filename) {
+        int lastDot = filename.lastIndexOf(".");
+        return (lastDot != -1) ? filename.substring(0, lastDot) : filename;
 
     private String ensureUniqueFileName(String fileName) {
         File destination = new File("uploads/" + fileName);
@@ -141,7 +198,6 @@ public class PhotoSelectionController {
             dos.writeUTF(fileName);
             dos.writeLong(selectedFile.length());
 
-            // Send the file content
             byte[] buffer = new byte[4096];
             int bytesRead;
             while ((bytesRead = fis.read(buffer)) != -1) {
@@ -149,6 +205,42 @@ public class PhotoSelectionController {
             }
             dos.flush();
 
+            String serverResponse = new DataInputStream(socket.getInputStream()).readUTF();
+
+            switch (serverResponse) {
+                case "UPLOAD_SUCCESS":
+                    showAlert(Alert.AlertType.INFORMATION, "Upload Successful", "Your file has been uploaded successfully!");
+                    navigateBackToHome();
+                    break;
+
+                case "DUPLICATE_FILE":
+                    Platform.runLater(() -> {
+                        Alert duplicateAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                        duplicateAlert.setTitle("Duplicate File");
+                        duplicateAlert.setHeaderText("A file with this name already exists.");
+                        duplicateAlert.setContentText("Rename the file and try again, or cancel the upload?");
+
+                        ButtonType renameButton = new ButtonType("Rename");
+                        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+                        duplicateAlert.getButtonTypes().setAll(renameButton, cancelButton);
+
+                        Optional<ButtonType> result = duplicateAlert.showAndWait();
+                        if (result.isPresent() && result.get() == renameButton) {
+                            promptForFileName();
+                        } else {
+                            showAlert(Alert.AlertType.INFORMATION, "Upload Cancelled", "File upload has been cancelled.");
+                            navigateBackToHome();
+                        }
+                    });
+                    break;
+
+                default:
+                    showAlert(Alert.AlertType.ERROR, "Upload Failed", "An unexpected error occurred. Server response: " + serverResponse);
+                    break;
+            }
+
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Upload Failed", "Error uploading file: " + e.getMessage());
             Logging.log("Upload completed for file: " + fileName);
             showAlert(Alert.AlertType.INFORMATION, "Upload Successful", "Your photo has been uploaded successfully!");
             navigateBackToHome();
@@ -158,6 +250,7 @@ public class PhotoSelectionController {
             showAlert(Alert.AlertType.ERROR, "Upload Failed", "Error uploading photo: " + e.getMessage());
         }
     }
+
 
     private void navigateTo(String fxmlFile) {
         try {

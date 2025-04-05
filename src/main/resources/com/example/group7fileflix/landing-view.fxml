@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="450.0" style="-fx-background-color: linear-gradient(to bottom right, #ffffff, #f7f0e8);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.LandingPage">
+
+    <children>
+        <!-- Logo Image -->
+        <ImageView fx:id="logoImage" fitHeight="200.0" fitWidth="300.0" layoutX="142.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/FileFlix.png" />
+            </image>
+            <effect>
+                <DropShadow color="#6E6E6E" radius="10" spread="0.3" />
+            </effect>
+        </ImageView>
+
+        <!-- Welcome Text -->
+        <Label layoutX="130.0" layoutY="287.0" style="-fx-text-fill: #2E2E2E; -fx-font-size: 24px; -fx-font-family: 'Arial';" text="Welcome to FileFlix" />
+    </children>
+</AnchorPane>
