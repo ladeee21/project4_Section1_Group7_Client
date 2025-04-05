@@ -1,6 +1,8 @@
 package com.example.group7fileflix;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,7 +19,8 @@ public class FileController {
 
     @FXML private ListView<String> fileListView;
     @FXML private Button btnOpen;
-    @FXML private Button btnDelete;
+    @FXML private Button btnDelete, btnbackward;
+
 
     private final String username = UserSession.getUsername();
     private final Path userDirectory = Paths.get("client_retrieves", username);
@@ -28,6 +31,12 @@ public class FileController {
 
         btnOpen.setOnAction(event -> openSelectedFile());
         btnDelete.setOnAction(event -> deleteSelectedFile());
+
+        if(btnbackward!=null) {
+            btnbackward.setOnAction(event -> navigateTo("home2-view.fxml"));
+        }else{
+            System.out.println("backward is Null!");
+        }
     }
 
     private void loadFiles() {
@@ -37,8 +46,10 @@ public class FileController {
                 Files.list(userDirectory)
                         .filter(Files::isRegularFile)
                         .forEach(path -> fileListView.getItems().add(path.getFileName().toString()));
+                Logging.log("Files loaded for user: " + username);
             }
         } catch (IOException e) {
+            Logging.log("Error loading files for user: " + username + ". " + e.getMessage());  // Log error
             showError("Error loading files.");
         }
     }
@@ -51,8 +62,10 @@ public class FileController {
         Path filePath = userDirectory.resolve(filename);
         try {
             byte[] fileContent = Files.readAllBytes(filePath); // Read the content from the file
+            Logging.log("File opened: " + filename);
             showFileContent(filename, filePath, fileContent); // Pass filePath and content to the method
         } catch (IOException e) {
+            Logging.log("Error reading file: " + filename + ". " + e.getMessage());
             showError("Error reading the file.");
         }
     }
@@ -99,6 +112,7 @@ public class FileController {
 
         } else {
             // Open other file types with system's default application
+            Logging.log("Opening file with system default app: " + filename);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("File Retrieved");
             alert.setHeaderText("File retrieved successfully.");
@@ -108,6 +122,7 @@ public class FileController {
             try {
                 Desktop.getDesktop().open(new File(filePath.toString())); // Open file with system default app
             } catch (IOException e) {
+                Logging.log("Error opening file with system default app: " + filename + ". " + e.getMessage());
                 showError("Could not open file: " + e.getMessage());
             }
         }
@@ -123,9 +138,26 @@ public class FileController {
         try {
             Files.delete(filePath);
             loadFiles(); // Refresh file list
+            Logging.log("File deleted: " + filename);
             showInfo("File deleted successfully.");
         } catch (IOException e) {
+            Logging.log("Error deleting file: " + filename + ". " + e.getMessage());
             showError("Error deleting file.");
+        }
+    }
+
+    private void navigateTo(String fxmlFile) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/group7fileflix/" + fxmlFile));
+            Parent root = loader.load();
+            Stage stage = (Stage) btnbackward.getScene().getWindow(); // Get current stage
+            stage.setScene(new Scene(root, 400, 420));
+            stage.show();
+            Logging.log("Navigated to: " + fxmlFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Logging.log("Failed to navigate to " + fxmlFile + ". " + e.getMessage());
+            System.out.println("Failed to load " + fxmlFile);
         }
     }
 

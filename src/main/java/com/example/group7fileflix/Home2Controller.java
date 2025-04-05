@@ -63,8 +63,10 @@ public class Home2Controller  {
             Stage stage = (Stage) btnSettings.getScene().getWindow(); // Get current stage
             stage.setScene(new Scene(root, 400, 420));
             stage.show();
+            Logging.log("Navigated to: " + fxmlFile);
         } catch (IOException e) {
             e.printStackTrace();
+            Logging.log("Failed to navigate to " + fxmlFile + ". " + e.getMessage());
             System.out.println("Failed to load " + fxmlFile);
         }
     }

@@ -38,12 +38,18 @@ public class SendFilesController {
 
         if (selectedFile != null) {
             long fileSize = selectedFile.length();
+
             if (fileSize < 1048576) {
+
+            if (fileSize < 1048576) { // 1MB = 1048576 bytes
+                Logging.log("Selected file too small: " + selectedFile.getName());
                 showAlert(Alert.AlertType.ERROR, "File Too Small", "Please select a file larger than 1MB.");
                 selectedFile = null;
             } else {
+                Logging.log("File selected: " + selectedFile.getAbsolutePath() + " (" + fileSize + " bytes)");
                 showAlert(Alert.AlertType.INFORMATION, "File Selected", "Selected File: " + selectedFile.getName());
             }
+
         }
     }
 
@@ -89,7 +95,6 @@ public class SendFilesController {
             }
             return null;
         });
-
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(nameOnly -> {
             if (nameOnly.isEmpty()) {
@@ -99,6 +104,11 @@ public class SendFilesController {
             } else {
                 String finalName = nameOnly + extension;
                 sendFileWithMetadata(finalName);
+
+            String uniqueFileName = ensureUniqueFileName(trimmedFileName);
+            if (uniqueFileName != null) {
+                sendFileWithMetadata(uniqueFileName);
+                Logging.log("User entered file name: " + trimmedFileName);
             }
         });
     }
@@ -123,6 +133,9 @@ public class SendFilesController {
              FileInputStream fis = new FileInputStream(selectedFile)) {
 
             dos.writeUTF("UPLOAD");
+
+            //LOG BEFORE sending
+            Logging.log("Sending file: " + fileName + " from user: " + username);
             dos.writeUTF(username);
             dos.writeUTF(fileName);
             dos.writeLong(selectedFile.length());
@@ -167,9 +180,13 @@ public class SendFilesController {
                     showAlert(Alert.AlertType.ERROR, "Upload Failed", "An unexpected error occurred. Server response: " + serverResponse);
                     break;
             }
+            showAlert(Alert.AlertType.INFORMATION, "Upload Successful", "Your file has been uploaded successfully!");
+            Logging.log("Upload successful: " + fileName + " (" + selectedFile.length() + " bytes)");
+            navigateBackToHome();
 
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Upload Failed", "Error uploading file: " + e.getMessage());
+            Logging.log("Upload failed for file: " + fileName + " | Error: " + e.getMessage());
         }
     }
 
@@ -187,6 +204,7 @@ public class SendFilesController {
             Stage stage = (Stage) btnbackward.getScene().getWindow();
             stage.setScene(new Scene(root, 400, 420));
             stage.show();
+            Logging.log("Navigated back to home2-view.fxml");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Failed to load " + fxmlFile);
