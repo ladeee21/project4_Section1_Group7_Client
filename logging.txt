@@ -31,3 +31,58 @@
 [2025-04-05 11:00:31] Files loaded for user: s_shalzy
 [2025-04-05 11:00:34] Navigated to: home2-view.fxml
 [2025-04-05 11:00:46] Navigated to: home-view.fxml
+[2025-04-05 11:30:52] Registration failed - communication error: An established connection was aborted by the software in your host machine
+[2025-04-05 11:52:15] Registration failed - communication error: An established connection was aborted by the software in your host machine
+[2025-04-10 09:30:16] Registration failed - communication error: An established connection was aborted by the software in your host machine
+[2025-04-10 09:56:55] Registration failed - username already taken: s_shalzy
+[2025-04-10 10:05:22] Registration failed - username already taken: s_shalzy
+[2025-04-10 10:06:44] Attempting login for user: s_shalzy
+[2025-04-10 10:06:45] Login successful for user: s_shalzy
+[2025-04-10 10:06:47] Navigated to home-view.fxml
+[2025-04-10 10:07:19] Navigated to: settings-view.fxml
+[2025-04-10 10:07:22] Navigated to: home-view.fxml
+[2025-04-10 12:15:55] Attempting login for user: s_shalzy
+[2025-04-10 12:15:55] Login successful for user: s_shalzy
+[2025-04-10 12:15:57] Navigated to home-view.fxml
+[2025-04-10 12:16:01] Navigated to: home-view.fxml
+[2025-04-10 12:16:09] Navigated to: home-view.fxml
+[2025-04-10 12:16:16] Navigated to: home-view.fxml
+[2025-04-10 12:16:35] Navigated to: settings-view.fxml
+[2025-04-10 12:16:39] User logged out.
+[2025-04-10 12:16:39] Switched scene to: hello-view.fxml
+[2025-04-10 12:41:40] Attempting login for user: s_shalzy
+[2025-04-10 12:41:41] Login successful for user: s_shalzy
+[2025-04-10 12:41:43] Navigated to home-view.fxml
+[2025-04-10 12:41:54] Navigated to: settings-view.fxml
+[2025-04-10 12:41:56] User logged out successfully: s_shalzy
+[2025-04-10 12:41:56] Switched scene to: hello-view.fxml
+[2025-04-10 13:57:32] Attempting login for user: s_shalzy
+[2025-04-10 13:57:33] Login successful for user: s_shalzy
+[2025-04-10 13:57:35] Navigated to home-view.fxml
+[2025-04-10 13:57:49] Navigated to: settings-view.fxml
+[2025-04-10 13:57:51] User logged out: s_shalzy
+[2025-04-10 14:11:20] Attempting login for user: s_shalzy
+[2025-04-10 14:11:20] Login successful for user: s_shalzy
+[2025-04-10 14:11:34] Navigated to home-view.fxml
+[2025-04-10 14:11:45] Navigated to: settings-view.fxml
+[2025-04-10 14:11:47] User logged out: s_shalzy
+[2025-04-10 14:16:53] Attempting login for user: s_shalzy
+[2025-04-10 14:16:53] Login successful for user: s_shalzy
+[2025-04-10 14:18:41] Navigated to home-view.fxml
+[2025-04-10 15:24:22] Attempting login for user: s_shalzy
+[2025-04-10 15:24:22] Login successful for user: s_shalzy
+[2025-04-10 15:24:25] Navigated to home-view.fxml
+[2025-04-10 15:24:49] Navigated to: settings-view.fxml
+[2025-04-10 15:24:51] User logged out: s_shalzy
+[2025-04-10 15:38:43] Attempting login for user: s_shalzy
+[2025-04-10 15:38:43] Login successful for user: s_shalzy
+[2025-04-10 15:38:46] Navigated to home-view.fxml
+[2025-04-10 15:38:52] Navigated to: settings-view.fxml
+[2025-04-10 15:38:54] User logged out: s_shalzy
+[2025-04-10 15:44:43] Registration failed for dd_alli: Connection refused: connect
+[2025-04-10 15:46:17] Registration successful: dd_alli
+[2025-04-10 15:46:20] Navigated to hello-view.fxml
+[2025-04-10 15:48:04] Attempting login for user: dd_alli
+[2025-04-10 15:48:04] Login successful for user: dd_alli
+[2025-04-10 15:48:07] Navigated to home-view.fxml
+[2025-04-10 15:48:17] Navigated to: home2-view.fxml

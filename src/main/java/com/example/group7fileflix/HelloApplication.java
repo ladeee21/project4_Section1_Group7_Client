@@ -15,15 +15,6 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        // Establish connection before opening GUI
-        try {
-            ClientConnection.getInstance();
-            System.out.println("Connected to server!");
-        } catch (IOException e) {
-            System.out.println("Failed to connect to server.");
-            return;
-        }
-
         // Load the Landing Page first
         FXMLLoader landingLoader = new FXMLLoader(getClass().getResource("landing-view.fxml"));
         Parent landingRoot = landingLoader.load();
@@ -51,7 +42,6 @@ public class HelloApplication extends Application {
         });
         wait.play();
     }
-
     public static void main(String[] args) {
         launch();
     }
