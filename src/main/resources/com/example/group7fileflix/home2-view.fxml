@@ -50,7 +50,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Button accessibleText="Send" layoutX="54.0" layoutY="368.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: #FFFFFF;">
+      <Button fx:id="btnHome" accessibleText="Home" layoutX="54.0" layoutY="368.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: #FFFFFF;">
          <graphic>
             <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>

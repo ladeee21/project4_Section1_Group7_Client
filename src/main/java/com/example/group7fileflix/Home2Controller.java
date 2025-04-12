@@ -16,6 +16,7 @@ public class Home2Controller  {
     @FXML private Button Fileset;
     @FXML private Button btnSettings;
     @FXML private Button btnbackward;
+    @FXML private Button btnHome;
 
     @FXML
     public void initialize() {
@@ -41,6 +42,11 @@ public class Home2Controller  {
             System.out.println("backward is Null!");
         }
 
+        if(btnHome!=null){
+            btnHome.setOnAction(event -> navigateTo("home-view.fxml"));
+        }else{
+            System.out.println("btnHome is NULL!");
+        }
     }
 
     private void switchScene(String fxmlFile) {

@@ -17,6 +17,7 @@ public class HomeController {
     @FXML private Button btnReceive;
     @FXML private Button btnFiles;
     @FXML private Button btnSettings;
+    @FXML private Button btnHome;
 
 
     @FXML
@@ -44,7 +45,11 @@ public class HomeController {
         } else {
             System.out.println("btnLogout is NULL!");
         }
-
+        if(btnHome!=null){
+            btnHome.setOnAction(event -> navigateTo("home-view.fxml"));
+        }else{
+            System.out.println("btnHome is NULL!");
+        }
 
     }
 
