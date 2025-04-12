@@ -9,80 +9,128 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class RegisterController {
-
     @FXML private TextField txtUsername;
     @FXML private PasswordField txtPassword;
     @FXML private PasswordField txtConfirmPassword;
     @FXML private Button btnRegister;
 
-    // Reference to the client socket (established on HelloApplication)
-    private ClientConnection client;
-
-    // Initialize the RegisterController with the client connection
-    public void setClient(ClientConnection client) {
-        this.client = client;
-    }
-
-    @FXML
-    public void initialize() {
-        if (btnRegister == null) {
-            System.out.println("Error: btnRegister is NULL! Check FXML file.");
-        } else {
-            System.out.println("btnRegister successfully loaded.");
-        }
-    }
-
     @FXML
     public void handleRegister() {
-        String username = txtUsername.getText();
+        String username = txtUsername.getText().trim();
         String password = txtPassword.getText();
         String confirmPassword = txtConfirmPassword.getText();
 
         // Validate input fields
-        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-            showAlert(Alert.AlertType.WARNING, "Registration Failed", "Please enter all the fields.");
-            return;
-        }
-        if (!password.equals(confirmPassword)) {
-            showAlert(Alert.AlertType.INFORMATION, "Registration Failed", "Passwords do not match.");
+        if (!validateInputs(username, password, confirmPassword)) {
             return;
         }
 
-        // Send registration request to the server
         try {
-            // Construct the registration message
+            // Get the client connection
+            ClientConnection connection = ClientConnection.getInstance();
+            DataOutputStream output = connection.getOutput();
+            DataInputStream input = connection.getInput();
 
-            ClientConnection.getInstance().getOutput().writeUTF("REGISTER");
-            ClientConnection.getInstance().getOutput().writeUTF(username);
-            ClientConnection.getInstance().getOutput().writeUTF(password);
+            // Send registration request
+            output.writeUTF("REGISTER");
+            output.writeUTF(username);
+            output.writeUTF(password);
+            output.flush();
 
-            // Send message to the server via ClientConnection
+            // Handle server response
+            handleRegistrationResponse(input, username);
 
-            // Wait for response from the server
-            String response = ClientConnection.getInstance().getInput().readUTF();
-        if (response.equals("REGISTER_SUCCESS")) {
-                UserSession.setUsername(username);
-                Logging.log("Registration successful: " + username);
-                showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "Click ok to Continue.");
-                navigateTo("home-view.fxml"); // Navigate to home screen
-            } else if (response.equals("USERNAME_TAKEN")) {
-                Logging.log("Registration failed - username already taken: " + username);
-                showAlert(Alert.AlertType.ERROR, "Registration Failed", "Username already exists.");
-            }else {
-            showAlert(Alert.AlertType.ERROR, "Registration Failed", "Please try again.");
-        }
         } catch (IOException e) {
-            Logging.log("Registration failed - communication error: " + e.getMessage());
-            showAlert(Alert.AlertType.ERROR, "Error", "Failed Communicating with the server.");
-            e.printStackTrace();
+            handleRegistrationError(e, username);
         }
-
-
     }
 
+    private boolean validateInputs(String username, String password, String confirmPassword) {
+        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            showAlert(Alert.AlertType.WARNING, "Registration Failed",
+                    "Please enter all required fields.");
+            return false;
+        }
+
+        if (username.length() < 4) {
+            showAlert(Alert.AlertType.WARNING, "Registration Failed",
+                    "Username must be at least 4 characters long.");
+            txtUsername.requestFocus();
+            return false;
+        }
+
+        if (password.length() < 6) {
+            showAlert(Alert.AlertType.WARNING, "Registration Failed",
+                    "Password must be at least 6 characters long.");
+            txtPassword.requestFocus();
+            return false;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            showAlert(Alert.AlertType.ERROR, "Registration Failed",
+                    "Passwords do not match.");
+            clearFields();
+            txtPassword.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+    private void handleRegistrationResponse(DataInputStream input, String username) throws IOException {
+        String response = input.readUTF();
+
+        switch (response) {
+            case "REGISTER_SUCCESS":
+                UserSession.setUsername(username);
+                Logging.log("Registration successful: " + username);
+                showAlert(Alert.AlertType.INFORMATION, "Success",
+                        "Registration successful! You can now login.");
+                navigateTo("home-view.fxml");
+                break;
+
+            case "USERNAME_TAKEN":
+                Logging.log("Registration failed - username taken: " + username);
+                showAlert(Alert.AlertType.ERROR, "Registration Failed",
+                        "Username already taken. Please choose a different one.");
+                txtUsername.requestFocus();
+                break;
+
+            case "REGISTER_FAILED":
+                Logging.log("Registration failed - server error: " + username);
+                showAlert(Alert.AlertType.ERROR, "Registration Failed",
+                        "Server error during registration. Please try again.");
+                clearFields();
+                break;
+
+            default:
+                Logging.log("Unknown registration response: " + response);
+                showAlert(Alert.AlertType.ERROR, "Registration Failed",
+                        "Unexpected server response. Please try again.");
+                clearFields();
+        }
+    }
+
+    private void handleRegistrationError(IOException e, String username) {
+        Logging.log("Registration failed for " + username + ": " + e.getMessage());
+
+        try {
+            // Attempt to reconnect
+            ClientConnection.getInstance().reconnect();
+            showAlert(Alert.AlertType.ERROR, "Connection Error",
+                    "Temporary connection issue. Please try again.");
+        } catch (IOException ex) {
+            showAlert(Alert.AlertType.ERROR, "Connection Error",
+                    "Could not connect to server. Please check your connection.");
+            clearFields();
+        }
+    }
 
     private void navigateTo(String fxmlFile) {
         try {
@@ -107,4 +155,18 @@ public class RegisterController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    // New method to clear all input fields
+    private void clearFields() {
+        txtUsername.clear();
+        txtPassword.clear();
+        txtConfirmPassword.clear();
+
+        txtUsername.requestFocus();
+    }
 }
+
+
+
+
+

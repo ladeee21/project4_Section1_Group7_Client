@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.group7fileflix.HomeController">
 
    <children>
 
@@ -74,7 +72,7 @@
          <children>
 
             <!-- Home Button -->
-            <Button layoutX="50.0" layoutY="1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 15;">
+            <Button fx:id="btnHome" layoutX="50.0" layoutY="1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 15;">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -83,7 +81,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Label layoutX="52.0" layoutY="35.0" text="Home">
+            <Label layoutX="53.0" layoutY="29.0" text="Home">
                <font>
                   <Font size="11.0" />
                </font>
@@ -99,7 +97,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Label layoutX="240.0" layoutY="35.0" text="Settings">
+            <Label layoutX="236.0" layoutY="29.0" text="Settings">
                <font>
                   <Font size="11.0" />
                </font>

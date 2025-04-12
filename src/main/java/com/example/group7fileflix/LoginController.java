@@ -37,9 +37,10 @@ public class LoginController {
             return;
         }
 
-        try (Socket socket = new Socket("localhost", 55000);
-             DataOutputStream output = new DataOutputStream(socket.getOutputStream());
-             DataInputStream input = new DataInputStream(socket.getInputStream())) {
+        try {
+            ClientConnection connection = ClientConnection.getInstance();
+            DataOutputStream output = connection.getOutput();
+            DataInputStream input = connection.getInput();
 
             Logging.log("Attempting login for user: " + username);
             output.writeUTF("LOGIN");
@@ -50,6 +51,7 @@ public class LoginController {
             if (response.equals("AUTH_SUCCESS")) {
                 // Set the username in UserSession
                 UserSession.setUsername(username);
+                UserSession.setConnection(connection);
                 Logging.log("Login successful for user: " + username);
                 showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome back!");
                 navigateTo("home-view.fxml");

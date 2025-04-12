@@ -31,65 +31,58 @@
 [2025-04-05 11:00:31] Files loaded for user: s_shalzy
 [2025-04-05 11:00:34] Navigated to: home2-view.fxml
 [2025-04-05 11:00:46] Navigated to: home-view.fxml
-[2025-04-05 11:07:47] Attempting login for user: Navjeet
-[2025-04-05 11:07:47] Login successful for user: Navjeet
-[2025-04-05 11:07:49] Navigated to home-view.fxml
-[2025-04-05 11:07:58] Selected file: C:\Users\navje\OneDrive - Conestoga College\Desktop\Bsc Computer Science\Semester 4\Project IV\3MB Image.jpg (Size: 1630962 bytes)
-[2025-04-05 11:07:58] Image loaded and displayed: 3MB Image.jpg
-[2025-04-05 11:08:07] Starting upload for user: Navjeet, file: Image.jpg
-[2025-04-05 11:08:11] Navigated to home2-view.fxml
-[2025-04-05 11:08:16] Navigated to: home-view.fxml
-[2025-04-05 11:08:21] Attempting to retrieve file: Image
-[2025-04-05 11:08:21] User 'Navjeet' requested file: Image
-[2025-04-05 11:08:21] Access denied for user 'Navjeet' to file: Image - Reason: ACCESS_DENIED
-[2025-04-05 11:08:22] Failed to retrieve file: Image
-[2025-04-05 11:08:41] Attempting to retrieve file: Image.jpg
-[2025-04-05 11:08:41] User 'Navjeet' requested file: Image.jpg
-[2025-04-05 11:08:41] File retrieved successfully: Image.jpg
-[2025-04-05 11:08:41] File saved locally: C:\Users\navje\project4_Section1_Group7\client_retrieves\Navjeet\Image.jpg
-[2025-04-05 11:08:41] Displayed image file content for: Image.jpg
-[2025-04-05 11:08:47] Navigated to: home-view.fxml
-[2025-04-05 11:08:49] Files loaded for user: Navjeet
-[2025-04-05 11:08:52] Navigated to: home2-view.fxml
-[2025-04-05 11:08:54] Navigated to: home-view.fxml
-[2025-04-05 11:08:56] Navigated to: settings-view.fxml
-[2025-04-05 11:08:57] User logged out.
-[2025-04-05 11:08:57] Switched scene to: hello-view.fxml
-[2025-04-11 19:07:11] Attempting login for user: Navjeet
-[2025-04-11 19:07:11] Login successful for user: Navjeet
-[2025-04-11 19:07:13] Navigated to home-view.fxml
-[2025-04-11 19:07:25] Attempting to retrieve file: Relaxing.jpg
-[2025-04-11 19:07:25] User 'Navjeet' requested file: Relaxing.jpg
-[2025-04-11 19:07:25] Access denied for user 'Navjeet' to file: Relaxing.jpg - Reason: ACCESS_DENIED
-[2025-04-11 19:07:27] Failed to retrieve file: Relaxing.jpg
-[2025-04-11 19:07:32] Attempting to retrieve file: Relaxing
-[2025-04-11 19:07:32] User 'Navjeet' requested file: Relaxing
-[2025-04-11 19:07:32] File retrieved successfully: Relaxing
-[2025-04-11 19:07:32] File saved locally: C:\Users\navje\project4_Section1_Group7\client_retrieves\Navjeet\Relaxing
-[2025-04-11 19:07:34] Opened file with system default viewer: C:\Users\navje\project4_Section1_Group7\client_retrieves\Navjeet\Relaxing
-[2025-04-11 19:07:53] Attempting to retrieve file: Relaxing
-[2025-04-11 19:07:53] User 'Navjeet' requested file: Relaxing
-[2025-04-11 19:07:53] File retrieved successfully: Relaxing
-[2025-04-11 19:07:53] File saved locally: C:\Users\navje\project4_Section1_Group7\client_retrieves\Navjeet\Relaxing
-[2025-04-11 19:07:55] Opened file with system default viewer: C:\Users\navje\project4_Section1_Group7\client_retrieves\Navjeet\Relaxing
-[2025-04-11 19:08:01] Navigated to: home-view.fxml
-[2025-04-11 19:08:05] Files loaded for user: Navjeet
-[2025-04-11 19:08:09] File opened: Relaxing
-[2025-04-11 19:08:09] Opening file with system default app: Relaxing
-[2025-04-11 19:08:53] Navigated to: home2-view.fxml
-[2025-04-11 19:09:03] Navigated to: home-view.fxml
-[2025-04-11 19:09:12] Navigated to: settings-view.fxml
-[2025-04-11 19:09:13] User logged out.
-[2025-04-11 19:09:13] Switched scene to: hello-view.fxml
-[2025-04-11 19:13:47] Attempting login for user: Navjeet
-[2025-04-11 19:13:47] Login successful for user: Navjeet
-[2025-04-11 19:13:50] Navigated to home-view.fxml
-[2025-04-11 19:13:54] Navigated to: home2-view.fxml
-[2025-04-11 19:14:04] Navigated to: home-view.fxml
-[2025-04-11 19:15:56] Attempting login for user: Navjeet
-[2025-04-11 19:15:57] Login successful for user: Navjeet
-[2025-04-11 19:15:59] Navigated to home-view.fxml
-[2025-04-11 19:16:03] Navigated to: home-view.fxml
-[2025-04-11 19:16:06] Files loaded for user: Navjeet
-[2025-04-11 19:16:08] Navigated to: home2-view.fxml
-[2025-04-11 19:16:11] Navigated to: home-view.fxml
+[2025-04-05 11:30:52] Registration failed - communication error: An established connection was aborted by the software in your host machine
+[2025-04-05 11:52:15] Registration failed - communication error: An established connection was aborted by the software in your host machine
+[2025-04-10 09:30:16] Registration failed - communication error: An established connection was aborted by the software in your host machine
+[2025-04-10 09:56:55] Registration failed - username already taken: s_shalzy
+[2025-04-10 10:05:22] Registration failed - username already taken: s_shalzy
+[2025-04-10 10:06:44] Attempting login for user: s_shalzy
+[2025-04-10 10:06:45] Login successful for user: s_shalzy
+[2025-04-10 10:06:47] Navigated to home-view.fxml
+[2025-04-10 10:07:19] Navigated to: settings-view.fxml
+[2025-04-10 10:07:22] Navigated to: home-view.fxml
+[2025-04-10 12:15:55] Attempting login for user: s_shalzy
+[2025-04-10 12:15:55] Login successful for user: s_shalzy
+[2025-04-10 12:15:57] Navigated to home-view.fxml
+[2025-04-10 12:16:01] Navigated to: home-view.fxml
+[2025-04-10 12:16:09] Navigated to: home-view.fxml
+[2025-04-10 12:16:16] Navigated to: home-view.fxml
+[2025-04-10 12:16:35] Navigated to: settings-view.fxml
+[2025-04-10 12:16:39] User logged out.
+[2025-04-10 12:16:39] Switched scene to: hello-view.fxml
+[2025-04-10 12:41:40] Attempting login for user: s_shalzy
+[2025-04-10 12:41:41] Login successful for user: s_shalzy
+[2025-04-10 12:41:43] Navigated to home-view.fxml
+[2025-04-10 12:41:54] Navigated to: settings-view.fxml
+[2025-04-10 12:41:56] User logged out successfully: s_shalzy
+[2025-04-10 12:41:56] Switched scene to: hello-view.fxml
+[2025-04-10 13:57:32] Attempting login for user: s_shalzy
+[2025-04-10 13:57:33] Login successful for user: s_shalzy
+[2025-04-10 13:57:35] Navigated to home-view.fxml
+[2025-04-10 13:57:49] Navigated to: settings-view.fxml
+[2025-04-10 13:57:51] User logged out: s_shalzy
+[2025-04-10 14:11:20] Attempting login for user: s_shalzy
+[2025-04-10 14:11:20] Login successful for user: s_shalzy
+[2025-04-10 14:11:34] Navigated to home-view.fxml
+[2025-04-10 14:11:45] Navigated to: settings-view.fxml
+[2025-04-10 14:11:47] User logged out: s_shalzy
+[2025-04-10 14:16:53] Attempting login for user: s_shalzy
+[2025-04-10 14:16:53] Login successful for user: s_shalzy
+[2025-04-10 14:18:41] Navigated to home-view.fxml
+[2025-04-10 15:24:22] Attempting login for user: s_shalzy
+[2025-04-10 15:24:22] Login successful for user: s_shalzy
+[2025-04-10 15:24:25] Navigated to home-view.fxml
+[2025-04-10 15:24:49] Navigated to: settings-view.fxml
+[2025-04-10 15:24:51] User logged out: s_shalzy
+[2025-04-10 15:38:43] Attempting login for user: s_shalzy
+[2025-04-10 15:38:43] Login successful for user: s_shalzy
+[2025-04-10 15:38:46] Navigated to home-view.fxml
+[2025-04-10 15:38:52] Navigated to: settings-view.fxml
+[2025-04-10 15:38:54] User logged out: s_shalzy
+[2025-04-10 15:44:43] Registration failed for dd_alli: Connection refused: connect
+[2025-04-10 15:46:17] Registration successful: dd_alli
+[2025-04-10 15:46:20] Navigated to hello-view.fxml
+[2025-04-10 15:48:04] Attempting login for user: dd_alli
+[2025-04-10 15:48:04] Login successful for user: dd_alli
+[2025-04-10 15:48:07] Navigated to home-view.fxml
+[2025-04-10 15:48:17] Navigated to: home2-view.fxml
