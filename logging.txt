@@ -85,4 +85,12 @@
 [2025-04-10 15:48:04] Attempting login for user: dd_alli
 [2025-04-10 15:48:04] Login successful for user: dd_alli
 [2025-04-10 15:48:07] Navigated to home-view.fxml
-[2025-04-10 15:48:17] Navigated to: home2-view.fxml
+[2025-04-10 15:48:17] Navigated to: home2-view.fxml[2025-04-12 06:20:14] Attempting login for user: s_shalzy
+[2025-04-12 06:20:14] Login successful for user: s_shalzy
+[2025-04-12 06:20:16] Navigated to home-view.fxml
+[2025-04-12 06:20:29] Navigated to: home-view.fxml
+[2025-04-12 06:20:34] Files loaded for user: s_shalzy
+[2025-04-12 06:20:41] Navigated to: home2-view.fxml
+[2025-04-12 06:20:56] Navigated to: home-view.fxml
+[2025-04-12 06:21:00] Files loaded for user: s_shalzy
+[2025-04-12 06:21:02] Navigated to: home2-view.fxml

@@ -33,7 +33,7 @@ public class FileController {
         btnDelete.setOnAction(event -> deleteSelectedFile());
 
         if(btnbackward!=null) {
-            btnbackward.setOnAction(event -> navigateTo("home2-view.fxml"));
+            btnbackward.setOnAction(event -> navigateTo("home-view.fxml"));
         }else{
             System.out.println("backward is Null!");
         }
@@ -127,7 +127,6 @@ public class FileController {
             }
         }
     }
-
 
     // Delete the selected file
     private void deleteSelectedFile() {
